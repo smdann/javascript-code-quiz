@@ -1,5 +1,11 @@
 var startQuizEl = document.querySelector("#start");
 var timerEl = document.getElementById("time-left");
+var h1Tags = document.querySelector(".h1-tag");
+var pToButtons = document.querySelector("#para");
+
+// Question Variables
+var ques1 = "Commonly used data types DO NOT include:"
+
 
 // Timer Function
 function countdown() {
@@ -9,9 +15,16 @@ function countdown() {
         timerEl.textContent = timeLeft + " seconds remaining";
         if(timeLeft === 0) {
             clearInterval(timeInterval);
-            console.log("timer is running")
         }
     }, 1000);
+}
+
+// Question Function
+function question() {
+    h1Tags.replaceChildren("Commonly used data types DO NOT include:");
+    pToButtons.replaceChildren("1. Strings");
+    
+
 }
 
 // Click start button
@@ -22,6 +35,7 @@ startQuizEl.addEventListener("click", function(event) {
     if (event.target.getAttribute("id") === "start") {
         console.log("this worked");
         countdown();
+        question();
         
     }  
 })
