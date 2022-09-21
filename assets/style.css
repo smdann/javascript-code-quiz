@@ -69,6 +69,14 @@ p {
     
 }
 
+/* JavaScript Styling */
+body button {
+    width: 20%;
+    padding: 10px;
+    margin: 10px;
+    align-self: center;
+}
+
 /* Responsive Layout */
 @media screen and (max-width: 769px ) {
     header, nav {

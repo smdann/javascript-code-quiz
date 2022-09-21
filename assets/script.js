@@ -55,27 +55,26 @@ function showQuestion() {
       // Creates elements that will house question data
       var section = document.createElement("section");
       var h2Tag = document.createElement("h2");
-      var ulTag = document.createElement("ul");
-      var li1 = document.createElement("li");
-      var li2 = document.createElement("li");
-      var li3 = document.createElement("li");
-      var li4 = document.createElement("li");
+      var button1 = document.createElement("button");
+      var button2 = document.createElement("button");
+      var button3 = document.createElement("button");
+      var button4 = document.createElement("button");
+      
 
       // Adds questions data to each element
       h2Tag.textContent = currentQuestion.question;
-      li1.textContent = currentQuestion.answers[0];
-      li2.textContent = currentQuestion.answers[1];
-      li3.textContent = currentQuestion.answers[2];
-      li4.textContent = currentQuestion.answers[3];
+      button1.textContent = currentQuestion.answers[0];
+      button2.textContent = currentQuestion.answers[1];
+      button3.textContent = currentQuestion.answers[2];
+      button4.textContent = currentQuestion.answers[3];
       
       // Adds each element to the DOM
       document.body.appendChild(section);
       document.body.appendChild(h2Tag);
-      document.body.appendChild(ulTag);
-      document.body.appendChild(li1);
-      document.body.appendChild(li2);
-      document.body.appendChild(li3);
-      document.body.appendChild(li4);
+      document.body.appendChild(button1);
+      document.body.appendChild(button2);
+      document.body.appendChild(button3);
+      document.body.appendChild(button4);
     }
   
 //  }
