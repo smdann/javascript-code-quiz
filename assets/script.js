@@ -41,27 +41,36 @@ var questionIndex = 0;
 // Question Function
 function showQuestion() {
     // Clear all elements in main
-    
     mainSection.innerHTML = "";
-    
-    
     
     // Loop through the questions array
      for (var i = 0; i < questions.length; i++){
-      var currentQuestion = questions[i];
+      var currentQuestion = questions[0];
+      
+      // Creates elements that will house question data
       var section = document.createElement("section");
       var h2Tag = document.createElement("h2");
-      // var ulTag = document.createElement("ul");
-      // var li1 = document.createElement("li");
-      // var li2 = document.createElement("li");
-      // var li3 = document.createElement("li");
-      // var li4 = document.createElement("li");
+      var ulTag = document.createElement("ul");
+      var li1 = document.createElement("li");
+      var li2 = document.createElement("li");
+      var li3 = document.createElement("li");
+      var li4 = document.createElement("li");
 
+      // Adds questions data to each element
       h2Tag.textContent = currentQuestion.question;
+      li1.textContent = currentQuestion.answers[0];
+      li2.textContent = currentQuestion.answers[1];
+      li3.textContent = currentQuestion.answers[2];
+      li4.textContent = currentQuestion.answers[3];
       
-  
-
+      // Adds each element to the DOM
+      document.body.appendChild(section);
       document.body.appendChild(h2Tag);
+      document.body.appendChild(ulTag);
+      document.body.appendChild(li1);
+      document.body.appendChild(li2);
+      document.body.appendChild(li3);
+      document.body.appendChild(li4);
       
   
       
