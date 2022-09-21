@@ -10,6 +10,14 @@
 body {
     display: flex;
     flex-direction: column;
+    text-align: center;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    
 }
 
 /* Navigational Menu */
