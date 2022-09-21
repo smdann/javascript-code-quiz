@@ -90,7 +90,20 @@ function showQuestion() {
 
       console.log(button1)
 
-    }
+      button1.addEventListener("click", function(){
+        console.log("button 1 clicked")
+      })
+      button2.addEventListener("click", function(){
+        console.log("button 2 clicked")
+      })
+      button3.addEventListener("click", function(){
+        console.log("button 3 clicked")
+      })
+      button4.addEventListener("click", function(){
+        console.log("button 4 clicked")
+      })
+
+}
   
 //  }
    
@@ -107,17 +120,6 @@ startQuizEl.addEventListener("click", function(event) {
         showQuestion();
         // chooseAnswer();
         
-  // Each button will have the same event listener
-  document.getElementById("button-div").addEventListener("click", function(event){
-    
-      console.log(event)
-    // }
-  })
 
-  // chooseAnAnswer.addEventListener("click", function(event) {
-  //   console.log(event.target)
-
-  // }
-  // )
 }
 })
