@@ -3,8 +3,7 @@ var startQuizEl = document.querySelector("#start");
 var timerEl = document.getElementById("time-left");
 var currentScore = 0;
 var mainSection = document.querySelector("main");
-var questionArea = document.querySelector("h1-tag");
-var answerArea = document.createElement("ul");
+
 
 
 
@@ -24,6 +23,10 @@ var questions = [
     }
   ]
 
+console.log(questions[0]) //entire array
+console.log(questions[0].question) //just question
+console.log(questions[0].answers[0]) //first answer in string
+
 // Timer Function
 function countdown() {
     var timeLeft = 120;
@@ -36,7 +39,8 @@ function countdown() {
     }, 1000);
 }
 
-var questionIndex = 0;
+// Tells the function which question to use from the questions array
+var questionNumber = questions[0];
 
 // Question Function
 function showQuestion() {
@@ -44,8 +48,9 @@ function showQuestion() {
     mainSection.innerHTML = "";
     
     // Loop through the questions array
-     for (var i = 0; i < questions.length; i++){
-      var currentQuestion = questions[0];
+    //  for (var i = 0; i < questions.length; i++){
+      currentQuestion = questionNumber;
+      console.log(currentQuestion)
       
       // Creates elements that will house question data
       var section = document.createElement("section");
@@ -71,12 +76,9 @@ function showQuestion() {
       document.body.appendChild(li2);
       document.body.appendChild(li3);
       document.body.appendChild(li4);
-      
-  
-      
     }
   
- }
+//  }
    
 
 
