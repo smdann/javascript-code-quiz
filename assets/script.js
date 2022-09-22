@@ -1,12 +1,9 @@
-// Document selectors
+// Global Variables
 var startQuizEl = document.querySelector("#start");
 var timerEl = document.getElementById("time-left");
 var mainSection = document.querySelector("main");
 
-
 var currentScore = 0;
-
-
 
 
 // Array of questions containing individual questions with answer choices
@@ -15,19 +12,20 @@ var questions = [
     {   
       question: "Commonly used data types DO NOT include:",
       answers: ["strings", "booleans", "alerts", "numbers"],
-      correct: 2      
+      correct: "alerts"      
     },
     // Question 2
     {
       question: "The condition in an if / else statement is enclosed within ______.",
       answers: ["quotes", "curly brackets", "parentheses", "square brackets"],
-      correct: 2
+      correct: "parentheses"
     }
   ]
 
 // console.log(questions[0]) //entire array
 // console.log(questions[0].question) //just question
 // console.log(questions[0].answers[0]) //first answer in string
+// console.log(questions[0].correct)
 
 // Timer Function
 function countdown() {
@@ -40,7 +38,6 @@ function countdown() {
         }
     }, 1000);
 }
-
 
 
 // Tells the function which question to use from the questions array
@@ -64,13 +61,7 @@ function showQuestion() {
       var button2 = document.createElement("button");
       var button3 = document.createElement("button");
       var button4 = document.createElement("button");
-      
-      // Sets attribute of buttons to enable use of event listener for these buttons
-      buttonDiv.setAttribute("id", "button-div");
-      button1.setAttribute("id", "answerButtons");
-      button2.setAttribute("id", "answerButtons");
-      button3.setAttribute("id", "answerButtons");
-      button4.setAttribute("id", "answerButtons");
+      var answerFeedback = document.createElement("h4");
 
       // Adds questions data to each element
       h2Tag.textContent = currentQuestion.question;
@@ -88,24 +79,49 @@ function showQuestion() {
       document.body.appendChild(button3);
       document.body.appendChild(button4);
 
-      console.log(button1)
-
-      button1.addEventListener("click", function(){
-        console.log("button 1 clicked")
+      // Adds an event listener to each button. Compares the text of the answer choice selected to the text of the correct answer. Provides feedback.
+      button1.addEventListener("click", function(event){
+        if ((event.target.textContent) == (questions[0].correct)){
+          answerFeedback.textContent = ("Correct!");
+          document.body.appendChild(answerFeedback);
+        } else {
+          answerFeedback.textContent = ("Incorrect");
+          document.body.appendChild(answerFeedback);
+        }
       })
       button2.addEventListener("click", function(){
-        console.log("button 2 clicked")
+        if ((event.target.textContent) == (questions[0].correct)){
+          answerFeedback.textContent = ("Correct!");
+          document.body.appendChild(answerFeedback);
+        } else {
+          answerFeedback.textContent = ("Incorrect");
+          document.body.appendChild(answerFeedback);
+        }
       })
       button3.addEventListener("click", function(){
-        console.log("button 3 clicked")
+        if ((event.target.textContent) == (questions[0].correct)){
+          answerFeedback.textContent = ("Correct!");
+          document.body.appendChild(answerFeedback);
+        } else {
+          answerFeedback.textContent = ("Incorrect");
+          document.body.appendChild(answerFeedback);
+        }
       })
       button4.addEventListener("click", function(){
-        console.log("button 4 clicked")
+        if ((event.target.textContent) == (questions[0].correct)){
+          answerFeedback.textContent = ("Correct!");
+          document.body.appendChild(answerFeedback);
+        } else {
+          answerFeedback.textContent = ("Incorrect");
+          document.body.appendChild(answerFeedback);
+        }
       })
 
+     
+     
 }
   
-//  }
+
    
 
 
@@ -118,7 +134,7 @@ startQuizEl.addEventListener("click", function(event) {
         countdown();
         // and a question is presented
         showQuestion();
-        // chooseAnswer();
+        
         
 
 }
