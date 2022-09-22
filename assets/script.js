@@ -114,56 +114,9 @@ function showQuestion() {
   // Adds created elements to appropriate div so they can be displayed to the user
   questionDiv.appendChild(h2Tag);
   buttonGrid.append(button1, button2, button3, button4);
-      
-
-      // Adds an event listener to each button. 
-      // Compares the text of the answer choice selected to the text of the correct answer. 
-      // Provides feedback.
-      // Time deduction for incorrect answers
-      // button1.addEventListener("click", function(event){
-      //   if ((event.target.textContent) == (questions[0].correct)){
-      //     answerFeedback.textContent = ("Correct!");
-      //     document.body.appendChild(answerFeedback);
-      //   } else {
-      //     answerFeedback.textContent = ("Incorrect");
-      //     document.body.appendChild(answerFeedback);
-      //     timerEl.textContent = timerEl.textContent - 10;
-      //     console.log(timerEl.textContent)
-      //   }
-      // })
-      // button2.addEventListener("click", function(event){
-      //   if ((event.target.textContent) == (questions[0].correct)){
-      //     answerFeedback.textContent = ("Correct!");
-      //     document.body.appendChild(answerFeedback);
-      //   } else {
-      //     answerFeedback.textContent = ("Incorrect");
-      //     document.body.appendChild(answerFeedback);
-      //   }
-      // })
-      // button3.addEventListener("click", function(event){
-      //   if ((event.target.textContent) == (questions[0].correct)){
-      //     answerFeedback.textContent = ("Correct!");
-      //     document.body.appendChild(answerFeedback);
-      //   } else {
-      //     answerFeedback.textContent = ("Incorrect");
-      //     document.body.appendChild(answerFeedback);
-      //   }
-      // })
-      // button4.addEventListener("click", function(event){
-      //   if ((event.target.textContent) == (questions[0].correct)){
-      //     answerFeedback.textContent = ("Correct!");
-      //     document.body.appendChild(answerFeedback);
-      //   } else {
-      //     answerFeedback.textContent = ("Incorrect");
-      //     document.body.appendChild(answerFeedback);
-      //   }
-      // } 
-      //  )
+    
 } 
   
-
-  
-   
 function checkAnswer (userChoice){
   // Answer question correctly
   if (userChoice === questions[questionNumber].correct){
@@ -190,20 +143,6 @@ function checkAnswer (userChoice){
   }
 }
 
-// When all questions are answered or the timer reaches 0
-  // Quiz is over
-      // Hide questionContainer
-      // Display scoreContainer
-          // Score is displayed
-          // Form field to enter and submit initials is displayed
-
-  // Enter initials 
-  // Submit score to score board
-
-// Highscores will be stored in local storage (initials and score)
-
-// Highscores will be retrieved from local storage and displayed on the screen
-
 function endQuiz (){
   // Hides the question container
   questionContainer.classList.add("hide");
@@ -229,22 +168,18 @@ function endQuiz (){
   submit.textContent = ("Submit")
   initialsInput.appendChild(initialsIn);
   submitScore.appendChild(submit);
-
-  
 }
 
 
-// Event listener on start button waits for click
+// First event listener: start button to start quiz
 startQuizEl.addEventListener("click", function(event) {
   // After click, timer starts
   countdown();
   // And a question is displayed
   showQuestion();
-        
-
 })
 
-// Event listener on answer buttons waits for click
+// Second event listener: answer choice buttons
 buttonGrid.addEventListener("click", () => {
   // Adds the value attribute associated with the button that was clicked to the buttonClick variable
   var buttonClick = this.event.target.value
@@ -253,7 +188,30 @@ buttonGrid.addEventListener("click", () => {
   checkAnswer(buttonClick);
 })
 
+// Final event listener: submit score/initials button
+submitScore.addEventListener("click", () => {
+  console.log("submit score")
+  // grab initials
+  var userInitials = this.event.target.initialsInput.
+  console.log(userInitials);
+  // add to object
+
+})
+
+
+// Add final score to object
+
 
 // highScoreArr=JSON.parse(localStorage.getItem("highScores")) || []
 
 // highScoreArr=JSON.parse(localStorage.getItem("highScores")) || []
+
+
+
+
+// Enter initials 
+  // Submit score to score board
+
+// Highscores will be stored in local storage (initials and score)
+
+// Highscores will be retrieved from local storage and displayed on the screen
