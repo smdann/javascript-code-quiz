@@ -1,7 +1,6 @@
 // Global Variables
 var startQuizEl = document.querySelector("#start");
 var timerEl = document.getElementById("time-left");
-var mainSection = document.querySelector("main");
 var questionContainer = document.querySelector(".questionContainer");
 var questionDiv = document.querySelector("#question");
 var buttonGrid = document.querySelector("#btngrid");
@@ -10,9 +9,6 @@ var timeLeft = 120;
 var timeInterval;
 var score = 0;
 var finalScore;
-
-
-
 
 
 // Array of objects (question, answer choices, and a correct answer)
@@ -37,21 +33,21 @@ var questions = [
     },
     // Question 3
     {
-      question: "Commonly used data types DO NOT include:",
-      answer1: "strings", 
-      answer2: "booleans", 
-      answer3: "alerts", 
-      answer4: "numbers",
-      correct: "alerts"  
+      question: "Arrays in JavaScript can be used to store ______.",
+      answer1: "numbers and strings", 
+      answer2: "other arrays", 
+      answer3: "booleans", 
+      answer4: "all of the above",
+      correct: "all of the above"  
     },
     // Question 4
     {
-      question: "Commonly used data types DO NOT include:",
-      answer1: "strings", 
-      answer2: "booleans", 
-      answer3: "alerts", 
-      answer4: "numbers",
-      correct: "alerts" 
+      question: "String values must be enclosed within ______ when being assigned to variables",
+      answer1: "commmas", 
+      answer2: "curly brackets", 
+      answer3: "quotes", 
+      answer4: "parentheses",
+      correct: "quotes" 
     }
   ]
 
@@ -68,48 +64,48 @@ function countdown() {
         timerEl.textContent = timeLeft;
         if(timeLeft === 0) {
             clearInterval(timeInterval);
-            // Finished
+            // Displays "Time's Up!" when done
             timerEl.textContent = "Time's Up!";
         }
     }, 1000);
 }
 
 
-// Tells the function which question to use from the questions array
+// Tells the showQuestion function which question to use from the questions array
 var questionNumber = 0;
 
 // Question Function
 function showQuestion() {
-    if (questionNumber === questions.length){
+  // Initiates endQuiz function after the last question has been answered  
+  if (questionNumber === questions.length){
       endQuiz()
-    }
-    // Clear all elements in main
-    startContainer.classList.add("hide")
-    
-      
-      // Creates elements that will house question data
-      var h2Tag = document.createElement("h2");
-      var button1 = document.createElement("button");
-      var button2 = document.createElement("button");
-      var button3 = document.createElement("button");
-      var button4 = document.createElement("button");
-      var answerFeedback = document.createElement("h4");
+  }
+  // Hides the start container
+  startContainer.classList.add("hide")
+  
+  // Creates elements that will house question data
+  var h2Tag = document.createElement("h2");
+  var button1 = document.createElement("button");
+  var button2 = document.createElement("button");
+  var button3 = document.createElement("button");
+  var button4 = document.createElement("button");
+  var answerFeedback = document.createElement("h4");
 
-      // Adds questions data to each element
-      h2Tag.textContent = questions[questionNumber].question;
-      button1.textContent = questions[questionNumber].answer1;
-      button2.textContent = questions[questionNumber].answer2;
-      button3.textContent = questions[questionNumber].answer3;
-      button4.textContent = questions[questionNumber].answer4;
-      
-      button1.setAttribute("value", questions[questionNumber].answer1)
-      button2.setAttribute("value", questions[questionNumber].answer2)
-      button3.setAttribute("value", questions[questionNumber].answer3)
-      button4.setAttribute("value", questions[questionNumber].answer4)
-      // Adds each element to the DOM
-      
-      questionDiv.appendChild(h2Tag);
-      buttonGrid.append(button1, button2, button3, button4);
+  // Adds question and answer data to each element
+  h2Tag.textContent = questions[questionNumber].question;
+  button1.textContent = questions[questionNumber].answer1;
+  button2.textContent = questions[questionNumber].answer2;
+  button3.textContent = questions[questionNumber].answer3;
+  button4.textContent = questions[questionNumber].answer4;
+  
+  button1.setAttribute("value", questions[questionNumber].answer1)
+  button2.setAttribute("value", questions[questionNumber].answer2)
+  button3.setAttribute("value", questions[questionNumber].answer3)
+  button4.setAttribute("value", questions[questionNumber].answer4)
+  
+  // Adds created elements to appropriate div so they can be displayed to the user
+  questionDiv.appendChild(h2Tag);
+  buttonGrid.append(button1, button2, button3, button4);
       
 
       // Adds an event listener to each button. 
@@ -157,13 +153,8 @@ function showQuestion() {
       //  )
 } 
   
-// Answer question correctly
-  // Present a new question
 
-// Answer question incorrectly
-  // Time deduction and present new question
-
-// When all questions are answered or the timer reaches 0
+  // When all questions are answered or the timer reaches 0
   // Quiz is over
   // Enter initials 
   // Submit score to score board
@@ -173,43 +164,53 @@ function showQuestion() {
 // Highscores will be retrieved from local storage and displayed on the screen
    
 function checkAnswer (userChoice){
+  // Answer question correctly
   if (userChoice === questions[questionNumber].correct){
-    buttonGrid.innerHTML = ""
+    // Clears question and buttons
+    questionDiv.innerHTML = "";
+    buttonGrid.innerHTML = "";
+    // Selects next question in the array
     questionNumber ++;
+    // Adds a point to the score
     score ++;
-    console.log(score)
-    showQuestion()
+    console.log(score);
+    // Displays next question and buttons
+    showQuestion();
+  
+  // Answer question incorrectly -- does same as above + time deduction  
   } else {
+    questionDiv.innerHTML = ""
     buttonGrid.innerHTML = ""
     questionNumber ++;
+    // Deducts 10 seconds from the timer
     timeLeft = timeLeft - 10;
     console.log(timeLeft)
-    showQuestion()
+    showQuestion();
   }
 }
 
 function endQuiz (){
-
+  
 }
 
-// Click start button
-    // Add event listener to Start Quiz button
-startQuizEl.addEventListener("click", function(event) {
-    console.log("start quiz")
-    // If Start button is clicked, timer starts counting down
-        countdown();
-        // and a question is presented
-        showQuestion();
-        
-        
 
+// Event listener on start button waits for click
+startQuizEl.addEventListener("click", function(event) {
+  // After click, timer starts
+  countdown();
+  // And a question is displayed
+  showQuestion();
+        
 
 })
 
+// Event listener on answer buttons waits for click
 buttonGrid.addEventListener("click", () => {
+  // Adds the value attribute associated with the button that was clicked to the buttonClick variable
   var buttonClick = this.event.target.value
-  console.log(buttonClick)
-  checkAnswer(buttonClick)
+  console.log(buttonClick);
+  // Initiates function to check the value attribute against the correct answer
+  checkAnswer(buttonClick);
 })
 
 
