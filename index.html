@@ -10,24 +10,35 @@
 
 <body>
   <header>
+    <!-- Nav Bar -->
     <nav>
         <a href="" class="highscores" >View Highscores</a>
-        <h3 ><span id = "time-left"></span></h3>
+        <h3><span id = "time-left"></span></h3>
+        <h3><span id = "score"></span></h3>
     </nav>
   </header>
  
   <main>
+    <!-- Start Container -->
     <div class="startContainer">
     <h1 class = "h1-tag">JavaScript Coding Quiz</h1>
       <p id = "para">Test your knowledge of JavaScript fundamentals. Answer as many questions as you can before the timer runs out. Incorrect answers will result in a 10 second deduction in time and penalize your score.
       </p>
-    
       <button id="start">Start Quiz</button>
+    <!-- Question Container -->
     </div>
-      <div class="questionContainer">
-        <div id="question"></div>
-        <div id="btngrid"></div>
-      </div>
+    <div class="questionContainer">
+      <div id="question"></div>
+      <div id="btngrid"></div>
+    </div>
+    <!-- Initials Container -->
+    <div class="initialsContainer">
+      <div id="completeH1"></div>
+      <div id="scoreHere"></div>
+      <div id="enterInitials"></div>
+      <div id="initials"></div>
+      <div id="submit"></div>
+    </div>
   </main>
 
   <script src="./assets/script.js"></script>

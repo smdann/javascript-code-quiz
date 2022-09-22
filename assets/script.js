@@ -1,13 +1,21 @@
 // Global Variables
 var startQuizEl = document.querySelector("#start");
 var timerEl = document.getElementById("time-left");
+var startContainer = document.querySelector(".startContainer");
 var questionContainer = document.querySelector(".questionContainer");
 var questionDiv = document.querySelector("#question");
 var buttonGrid = document.querySelector("#btngrid");
-var startContainer = document.querySelector(".startContainer")
+var initialsContainer = document.querySelector(".initialsContainer");
+var scoreArea = document.querySelector("#score");
+var scoreDisplay = document.querySelector("#finalScore");
+var completeDiv = document.querySelector("#completeH1");
+var scoreDiv = document.querySelector("#scoreHere");
+var initialsP = document.querySelector("#enterInitials");
+var initialsInput = document.querySelector("#initials");
+var submitScore = document.querySelector("#submit");
 var timeLeft = 120;
 var timeInterval;
-var score = 0;
+var currentScore = 0;
 var finalScore;
 
 
@@ -78,7 +86,7 @@ var questionNumber = 0;
 function showQuestion() {
   // Initiates endQuiz function after the last question has been answered  
   if (questionNumber === questions.length){
-      endQuiz()
+      endQuiz();
   }
   // Hides the start container
   startContainer.classList.add("hide")
@@ -154,14 +162,7 @@ function showQuestion() {
 } 
   
 
-  // When all questions are answered or the timer reaches 0
-  // Quiz is over
-  // Enter initials 
-  // Submit score to score board
-
-// Highscores will be stored in local storage (initials and score)
-
-// Highscores will be retrieved from local storage and displayed on the screen
+  
    
 function checkAnswer (userChoice){
   // Answer question correctly
@@ -172,8 +173,8 @@ function checkAnswer (userChoice){
     // Selects next question in the array
     questionNumber ++;
     // Adds a point to the score
-    score ++;
-    console.log(score);
+    currentScore ++;
+    console.log(currentScore);
     // Displays next question and buttons
     showQuestion();
   
@@ -189,7 +190,46 @@ function checkAnswer (userChoice){
   }
 }
 
+// When all questions are answered or the timer reaches 0
+  // Quiz is over
+      // Hide questionContainer
+      // Display scoreContainer
+          // Score is displayed
+          // Form field to enter and submit initials is displayed
+
+  // Enter initials 
+  // Submit score to score board
+
+// Highscores will be stored in local storage (initials and score)
+
+// Highscores will be retrieved from local storage and displayed on the screen
+
 function endQuiz (){
+  // Hides the question container
+  questionContainer.classList.add("hide");
+  // Shows the initials container
+  initialsContainer.classList.replace("hide,", "show");
+  // Final score
+  finalScore = currentScore;
+  // Creates and displays initials container content
+  var h1Tag = document.createElement("h1");
+  var h2Tag = document.createElement("h2");
+  var pTag = document.createElement("p");
+  h1Tag.textContent = ("Quiz Complete!");
+  h2Tag.textContent = ("Your final score is " + finalScore + ".");
+  pTag.textContent = ("Enter your initials and hit submit.");
+  completeDiv.appendChild(h1Tag);
+  scoreDiv.appendChild(h2Tag);
+  initialsP.appendChild(pTag);
+
+  var initialsIn = document.createElement("input");
+  var submit = document.createElement("button");
+  initialsIn.setAttribute("type", "text");
+  initialsIn.setAttribute("name", "initials:");
+  submit.textContent = ("Submit")
+  initialsInput.appendChild(initialsIn);
+  submitScore.appendChild(submit);
+
   
 }
 
