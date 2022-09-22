@@ -77,6 +77,14 @@ body button {
     align-self: center;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
 /* Responsive Layout */
 @media screen and (max-width: 769px ) {
     header, nav {
