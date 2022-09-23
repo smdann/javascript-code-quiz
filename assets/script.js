@@ -89,6 +89,7 @@ var questionNumber = 0;
 
 // Question Function
 function showQuestion() {
+  
   // Initiates endQuiz function after the last question has been answered  
   if (questionNumber === questions.length){
       endQuiz();
@@ -192,12 +193,9 @@ function endQuiz (){
     score: finalScore
   }
 
-  // Get items from local storage
-  highScoreArr=JSON.parse(localStorage.getItem("finalScore")) || []
-
-  highScoreArr=JSON.parse(localStorage.setItem("userInitials")) || []
-
-  
+  // Set items to local storage
+  localStorage.setItem("initials", userInitials);
+  localStorage.setItem("score", finalScore);
 
   // Hide initials container
   initialsContainer.classList.add("hide");
@@ -212,12 +210,11 @@ function endQuiz (){
   scoresH1.appendChild(scoreh1);
   scoresList.appendChild(scoreUl);
 
-  
-
+  // Get items from local storage
   highScoreArr=JSON.parse(localStorage.getItem("finalScore")) || []
+  highScoreArr=JSON.parse(localStorage.getItem("userInitials")) || []
 
-  highScoreArr=JSON.parse(localStorage.setItem("userInitials")) || []
-
+  // Display highscores
   if (highScoreArr !== null) {
     for (var i = 0; i < highScoreArr.length; i++) {
       var scoreLi = document.createElement("li");
@@ -243,5 +240,6 @@ buttonGrid.addEventListener("click", () => {
   // Adds the value attribute associated with the button that was clicked to the buttonClick variable
   var userChoice = this.event.target.value
   // Initiates function to check the value attribute against the correct answer
+  
   checkAnswer(userChoice);
 })
