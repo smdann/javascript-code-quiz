@@ -13,11 +13,14 @@ var scoreDiv = document.querySelector("#scoreHere");
 var initialsP = document.querySelector("#enterInitials");
 var initialsInput = document.querySelector("#initials");
 var submitScore = document.querySelector("#submit");
-var timeLeft = 120;
+var highscoreContainer = document.querySelector("highscoreContainer");
+var scoresH1 = document.querySelector("#scoresH1");
+var scoresList = document.querySelector("#scoresList");
+var timeLeft = 60;
 var timeInterval;
 var currentScore = 0;
 var finalScore;
-
+var highScoreArr = [];
 
 // Array of objects (question, answer choices, and a correct answer)
 var questions = [
@@ -28,8 +31,8 @@ var questions = [
       answer2: "booleans", 
       answer3: "alerts", 
       answer4: "numbers",
-      correct: "alerts"      
-    },
+      correct: "alerts"    
+    }, 
     // Question 2
     {
       question: "The condition in an if / else statement is enclosed within ______.",
@@ -56,28 +59,30 @@ var questions = [
       answer3: "quotes", 
       answer4: "parentheses",
       correct: "quotes" 
+    },
+    // Question 5
+    {
+      question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+      answer1: "JavaScript", 
+      answer2: "Terminal/Bash", 
+      answer3: "for loops", 
+      answer4: "console.log",
+      correct: "console.log" 
     }
+    
   ]
-
-// console.log(questions[0]) //entire array
-// console.log(questions[0].question) //just question
-// console.log(questions[0].answers[0]) //first answer in string
-// console.log(questions[0].correct)
-
+   
 // Timer Function
 function countdown() {
-    
     timeInterval = setInterval(function() {
         timeLeft--;
         timerEl.textContent = timeLeft;
         if(timeLeft === 0) {
             clearInterval(timeInterval);
-            // Displays "Time's Up!" when done
             timerEl.textContent = "Time's Up!";
         }
     }, 1000);
 }
-
 
 // Tells the showQuestion function which question to use from the questions array
 var questionNumber = 0;
@@ -97,7 +102,6 @@ function showQuestion() {
   var button2 = document.createElement("button");
   var button3 = document.createElement("button");
   var button4 = document.createElement("button");
-  var answerFeedback = document.createElement("h4");
 
   // Adds question and answer data to each element
   h2Tag.textContent = questions[questionNumber].question;
@@ -114,7 +118,6 @@ function showQuestion() {
   // Adds created elements to appropriate div so they can be displayed to the user
   questionDiv.appendChild(h2Tag);
   buttonGrid.append(button1, button2, button3, button4);
-    
 } 
   
 function checkAnswer (userChoice){
@@ -130,7 +133,8 @@ function checkAnswer (userChoice){
     console.log(currentScore);
     // Displays next question and buttons
     showQuestion();
-  
+    
+
   // Answer question incorrectly -- does same as above + time deduction  
   } else {
     questionDiv.innerHTML = ""
@@ -150,6 +154,7 @@ function endQuiz (){
   initialsContainer.classList.replace("hide,", "show");
   // Final score
   finalScore = currentScore;
+ 
   // Creates and displays initials container content
   var h1Tag = document.createElement("h1");
   var h2Tag = document.createElement("h2");
@@ -161,13 +166,67 @@ function endQuiz (){
   scoreDiv.appendChild(h2Tag);
   initialsP.appendChild(pTag);
 
+  // Creates and displays initials input
   var initialsIn = document.createElement("input");
-  var submit = document.createElement("button");
   initialsIn.setAttribute("type", "text");
-  initialsIn.setAttribute("name", "initials:");
-  submit.textContent = ("Submit")
+  initialsIn.setAttribute("id", "enterInitials");
+  initialsIn.textContent = "";
   initialsInput.appendChild(initialsIn);
+  
+  // Creates and displays submit button
+  var submit = document.createElement("button");
+  submit.setAttribute("type", "submit");
+  submit.setAttribute("id", "submit");
+  submit.textContent = ("Submit")
   submitScore.appendChild(submit);
+  
+  // Final event listener: submit score/initials button
+  submitScore.addEventListener("click", function() {
+  // Grab initials
+  var userInitials = initialsIn.value
+  console.log(userInitials)
+  
+  // Object containing user's initials and score
+  var userScore = {
+    initials: userInitials,
+    score: finalScore
+  }
+
+  // Get items from local storage
+  highScoreArr=JSON.parse(localStorage.getItem("finalScore")) || []
+
+  highScoreArr=JSON.parse(localStorage.setItem("userInitials")) || []
+
+  
+
+  // Hide initials container
+  initialsContainer.classList.add("hide");
+ 
+  // Add Highscore container elements
+  var scoreh1 = document.createElement("h1");
+  var scoreUl = document.createElement("ul");
+  var scoreItem = document.createElement("li");
+  scoreh1.textContent = ("Highscores:");
+  scoreUl.textContent = ("");
+  scoreItem.textContent = ("");
+  scoresH1.appendChild(scoreh1);
+  scoresList.appendChild(scoreUl);
+
+  
+
+  highScoreArr=JSON.parse(localStorage.getItem("finalScore")) || []
+
+  highScoreArr=JSON.parse(localStorage.setItem("userInitials")) || []
+
+  if (highScoreArr !== null) {
+    for (var i = 0; i < highScoreArr.length; i++) {
+      var scoreLi = document.createElement("li");
+      scoreLi.textContent = highScoreArr[i].userInitials + "" + highScoreArr[i].finalScore;
+      scoreItem.appendChild(scoreLi);
+      console.log(scoreItem)
+    }
+  }
+})
 }
 
 
@@ -182,36 +241,7 @@ startQuizEl.addEventListener("click", function(event) {
 // Second event listener: answer choice buttons
 buttonGrid.addEventListener("click", () => {
   // Adds the value attribute associated with the button that was clicked to the buttonClick variable
-  var buttonClick = this.event.target.value
-  console.log(buttonClick);
+  var userChoice = this.event.target.value
   // Initiates function to check the value attribute against the correct answer
-  checkAnswer(buttonClick);
+  checkAnswer(userChoice);
 })
-
-// Final event listener: submit score/initials button
-submitScore.addEventListener("click", () => {
-  console.log("submit score")
-  // grab initials
-  var userInitials = this.event.target.initialsInput.
-  console.log(userInitials);
-  // add to object
-
-})
-
-
-// Add final score to object
-
-
-// highScoreArr=JSON.parse(localStorage.getItem("highScores")) || []
-
-// highScoreArr=JSON.parse(localStorage.getItem("highScores")) || []
-
-
-
-
-// Enter initials 
-  // Submit score to score board
-
-// Highscores will be stored in local storage (initials and score)
-
-// Highscores will be retrieved from local storage and displayed on the screen
