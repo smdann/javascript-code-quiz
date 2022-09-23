@@ -185,7 +185,6 @@ function endQuiz (){
   submitScore.addEventListener("click", function() {
   // Grab initials
   var userInitials = initialsIn.value
-  console.log(userInitials)
   
   // Object containing user's initials and score
   var userScore = {
@@ -211,17 +210,22 @@ function endQuiz (){
   scoresList.appendChild(scoreUl);
 
   // Get items from local storage
-  highScoreArr=JSON.parse(localStorage.getItem("finalScore")) || []
-  highScoreArr=JSON.parse(localStorage.getItem("userInitials")) || []
+  var initials = localStorage.getItem("initials");
+  var score = localStorage.getItem("score");
+  console.log(initials)
+  console.log(score)
 
-  // Display highscores
-  if (highScoreArr !== null) {
-    for (var i = 0; i < highScoreArr.length; i++) {
-      var scoreLi = document.createElement("li");
-      scoreLi.textContent = highScoreArr[i].userInitials + "" + highScoreArr[i].finalScore;
-      scoreItem.appendChild(scoreLi);
-      console.log(scoreItem)
-    }
+  if (!initialsLi || !scoreLi) {
+    var scoreLi = document.createElement("li");
+    var initialsLi = document.createElement("li");
+    scoreLi.textContent = initials;
+    initialsLi.textContent = score;
+    scoreItem.appendChild(scoreLi);
+    scoreItem.appendChild(initialsLi);
+    console.log(scoreItem);
+    scoresList.appendChild(scoreItem);
+    scoresList.appendChild(scoreItem);
+
   }
 })
 }
